@@ -5,6 +5,7 @@ import com.restapi.entity.User;
 import com.restapi.exception.UserNotFoundException;
 import com.restapi.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public UserService() {
+    }
+
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -25,6 +32,13 @@ public class UserService {
                 userDTO.getFirst_name(), userDTO.getLast_name(), userDTO.getAddress());
         log.info("ADD_NEW_USER: Added 1 user");
         return userRepository.save(user);
+    }
+
+    public User updateUser(Integer id, UserDTO userDTO) throws UserNotFoundException {
+        User existingUser = userRepository.findByUserId(id)
+                .orElseThrow(UserNotFoundException::new);
+        modelMapper.map(userDTO, existingUser);
+        return userRepository.save(existingUser);
     }
 
     public User getUser(Integer id) throws UserNotFoundException {
