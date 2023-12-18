@@ -4,5 +4,17 @@ spring:
       enabled: true
   datasource:
     url: jdbc:h2:mem:restapi
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: lenguyencm97@gmail.com
+    password: elnn eihl ztjh mnju
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 1MB
 server:
   port: 9292
+import:
+  directory: relative/com/restapi/excel/importfiles
+
