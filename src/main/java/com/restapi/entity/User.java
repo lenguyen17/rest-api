@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "USERS_TBL")
 @AllArgsConstructor(staticName = "build")
@@ -25,4 +27,7 @@ public class User {
     private String last_name;
     private String address;
 
+    // Add birthday and email as required
+    private LocalDate birthday;
+    private String email;
 }

@@ -2,12 +2,13 @@ package com.restapi.dto;
 
 
 import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor(staticName = "build")
@@ -35,4 +36,14 @@ public class UserDTO{
     @NotNull(message = "Last name cannot be null")
     @NotBlank(message = "Last name cannot be blank")
     private String address;
+
+    // Add birthday and email as required
+    @NotNull(message = "Birthday cannot be null")
+    @Past(message = "Birthday must be in the past")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate birthday;
+
+    @NotNull(message = "Email cannot be null")
+    @Email(message = "Invalid email format")
+    private String email;
 }
