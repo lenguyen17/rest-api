@@ -70,7 +70,7 @@ public class ExcelService {
                     String columnName = columnNames.get(colIndex).toLowerCase();
                     switch (columnName) {
                         case "userid":
-                            user.setUserId((int) currentCell.getNumericCellValue());
+                            user.setId((int) currentCell.getNumericCellValue());
                             break;
                         case "username":
                             user.setUsername(currentCell.getStringCellValue());
@@ -154,7 +154,7 @@ public class ExcelService {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             for (User user : userList) {
                 Row row = sheet.createRow(rowNum++);
-                row.createCell(0).setCellValue(user.getUserId());
+                row.createCell(0).setCellValue(user.getId());
                 row.createCell(1).setCellValue(user.getUsername());
                 row.createCell(2).setCellValue(user.getPassword());
                 row.createCell(3).setCellValue(user.getFirst_name());

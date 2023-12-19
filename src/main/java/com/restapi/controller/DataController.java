@@ -3,6 +3,7 @@ package com.restapi.controller;
 import com.restapi.entity.User;
 import com.restapi.exception.ExcelException;
 import com.restapi.repository.UserRepository;
+import com.restapi.service.CsvService;
 import com.restapi.service.ExcelService;
 import com.restapi.util.FileUtil;
 import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
@@ -18,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import static com.restapi.util.FileUtil.isCsvFile;
 import static com.restapi.util.FileUtil.isExcelFile;
 
 @RestController
@@ -26,6 +28,9 @@ public class DataController {
 
     @Autowired
     private ExcelService excelService;
+
+    @Autowired
+    private CsvService csvService;
 
     @Value("${spring.servlet.multipart.max-file-size}")
     private String maxFileSize;
@@ -41,13 +46,17 @@ public class DataController {
             throw new FileSizeLimitExceededException("File size exceeds the limit", multipartFile.getSize(), maxSize);
         }
         File file = File.createTempFile("temp", null);
-//        File file = ExcelUtil.convertToFile(multipartFile);
         file = FileUtil.convertToFile(multipartFile);
+        List<User> importedData;
         if (isExcelFile(file)) {
-            List<User> importedData = excelService.importData(file);
+            importedData = excelService.importData(file);
             file.delete();
             return ResponseEntity.ok(importedData);
-        } else {
+        }else if(isCsvFile(file)){
+            importedData = csvService.importFile(file);
+            file.delete();
+            return ResponseEntity.ok(importedData);
+        }else {
             throw new ExcelException("File is not supported");
         }
     }

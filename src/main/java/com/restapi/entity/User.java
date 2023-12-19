@@ -1,9 +1,6 @@
 package com.restapi.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,15 +9,15 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "USERS_TBL")
+@Table(name = "users_tbl")
 @AllArgsConstructor(staticName = "build")
 @NoArgsConstructor
 @Getter
 @Setter
 public class User {
     @Id
-    @GeneratedValue
-    private Integer userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String username;
     private String password;
     private String first_name;
