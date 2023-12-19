@@ -6,8 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-import java.util.Date;
-
 @CsvEntity(header = true)
 @Data
 public class UserCsvEntity {

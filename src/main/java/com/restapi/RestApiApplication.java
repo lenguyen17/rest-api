@@ -3,7 +3,6 @@ package com.restapi;
 import com.restapi.entity.User;
 import com.restapi.repository.UserRepository;
 import com.restapi.service.ExcelService;
-import com.restapi.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
