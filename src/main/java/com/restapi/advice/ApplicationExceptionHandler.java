@@ -1,6 +1,7 @@
 package com.restapi.advice;
 
 import com.restapi.exception.ExcelException;
+import com.restapi.exception.RoleException;
 import com.restapi.exception.UserAlreadyExistsException;
 import com.restapi.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -63,6 +64,13 @@ public class ApplicationExceptionHandler {
         log.warn("Received request: MAX_UPLOAD_SIZE");
         return getMapErrorMessage(ex, String.valueOf(HttpStatus.REQUEST_ENTITY_TOO_LARGE.value()));
 
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(RoleException.class)
+    public Map<String, String> handleRoleException(RoleException ex){
+        log.warn("Received request: BAD_ROLE_REQUEST");
+        return getMapErrorMessage(ex, String.valueOf(HttpStatus.BAD_REQUEST.value()));
     }
 
     public Map<String, String> getMapErrorMessage(Exception ex,String status){

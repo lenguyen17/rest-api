@@ -6,3 +6,8 @@ CREATE TABLE IF NOT EXISTS "users_tbl" (
   "last_name" VARCHAR(255) NULL,
   "address" VARCHAR(255) NULL
 );
+
+CREATE TABLE IF NOT EXISTS "roles_tbl" (
+    "id" SERIAL PRIMARY KEY,
+    "name" VARCHAR(255) UNIQUE NOT NULL
+);
