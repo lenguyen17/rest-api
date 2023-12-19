@@ -49,19 +49,19 @@ public class UserService {
     }
 
     public User updateUser(Integer id, UserDTO userDTO) throws UserNotFoundException {
-        User existingUser = userRepository.findByUserId(id)
+        User existingUser = userRepository.findById(id)
                 .orElseThrow(UserNotFoundException::new);
         modelMapper.map(userDTO, existingUser);
         return userRepository.save(existingUser);
     }
 
     public User getUser(Integer id) throws UserNotFoundException {
-        return userRepository.findByUserId(id)
+        return userRepository.findById(id)
                 .orElseThrow(UserNotFoundException::new);
     }
 
     public void deleteByUserId(Integer id){
-        userRepository.deleteByUserId(id);
+        userRepository.deleteById(id);
     }
 
     public List<User> getUsersByBirthday(LocalDate birthday){

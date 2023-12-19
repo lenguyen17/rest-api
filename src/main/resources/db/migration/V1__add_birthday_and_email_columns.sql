@@ -1,3 +1,0 @@
-ALTER TABLE user
-ADD COLUMN birthday DATE,
-ADD COLUMN email VARCHAR(255);

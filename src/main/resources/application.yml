@@ -1,9 +1,13 @@
 spring:
-  h2:
-    console:
-      enabled: true
+  flyway:
+    locations: classpath:/db/migration
+    baseline-version: 0
+    placeholders:
+      email-suffix: .vn
   datasource:
-    url: jdbc:h2:mem:restapi
+    url: jdbc:postgresql://localhost:5432/practice
+    username: postgres
+    password: 12345678
   mail:
     host: smtp.gmail.com
     port: 587
@@ -13,8 +17,12 @@ spring:
     multipart:
       max-file-size: 1MB
       max-request-size: 1MB
+  jpa:
+    properties:
+      hibernate: org.hibernate.dialect.PostgreSQLDialect
 server:
   port: 9292
 import:
   directory: relative/com/restapi/excel/importfiles
+
 

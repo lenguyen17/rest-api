@@ -25,7 +25,7 @@ public class RestApiApplication {
                 LocalDate birthday = LocalDate.parse("2000-01-11");
                 birthday = birthday.plusMonths(i);
                 birthday = birthday.plusDays(i + 3);
-                repository.save(User.build(i, "username_" + i, "password" + i, "First" + i,
+                repository.save(User.build(i, "username_" + i, "password" + i, "first" + i,
                         "Last_" + i, "Address_" + i, birthday, "theloveneverdie1997@gmail.com")
                 );
             }
